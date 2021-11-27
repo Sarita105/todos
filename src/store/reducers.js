@@ -1,4 +1,4 @@
-import {ADD_TODO} from './actions';
+import {ADD_TODO, UPDATE_TODO} from './actions';
 
 const initialState = [
     {
@@ -23,6 +23,15 @@ export const todos = (state=initialState, action) => {
     switch(type) {
         case ADD_TODO: {
             return state.concat(payload);
+        }
+        case UPDATE_TODO: {
+            state = state.map(i => {
+                if(i.id === payload.id) {
+                    return payload;
+                  }
+                  return i;
+            })
+            return state;
         }
         default:
             return state;
